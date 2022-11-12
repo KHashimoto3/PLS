@@ -1,0 +1,20 @@
+version: "3"
+services:
+  db:
+    build: mysql
+    container_name: pls-db
+    restart: always
+  web:
+    build: httpd
+    container_name: pls-web-server
+    ports:
+      - "8080:80"
+    volumes:
+      - ./apache/src:/var/www/html
+    depends_on:
+      - db
+  app:
+    build: tomcat
+    container_name: pls-app-server
+    volumes:
+      - ./tomcat/webapps:/usr/local/tomcat/webapps
