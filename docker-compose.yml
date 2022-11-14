@@ -9,6 +9,8 @@ services:
     container_name: pls-web-server
     ports:
       - "8080:80"
+    networks:
+      - plsNet
     volumes:
       - ./httpd/src:/usr/local/apache2/htdocs
     depends_on:
@@ -18,3 +20,8 @@ services:
     container_name: pls-app-server
     volumes:
       - ./tomcat/webapps:/usr/local/tomcat/webapps
+    networks:
+      - plsNet
+  networks:
+    plsNet:
+      driver: bridge
