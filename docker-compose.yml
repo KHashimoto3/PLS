@@ -7,16 +7,18 @@ services:
       - plsnet
     restart: always
   web:
-    build: httpd
+    build: nginx
     container_name: pls-web-server
     ports:
       - "8080:80"
     networks:
       - plsnet
     volumes:
-      - ./httpd/src:/usr/local/apache2/htdocs
+      - ./nginx/src:/usr/share/nginx/html
     depends_on:
       - app
+    environment:
+      APP_SERVER: http://app:81
   app:
     build: tomcat
     container_name: pls-app-server
