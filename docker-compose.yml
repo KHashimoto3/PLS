@@ -3,6 +3,8 @@ services:
   db:
     build: mysql
     container_name: pls-db
+    networks:
+      - plsnet
     restart: always
   web:
     build: httpd
@@ -10,18 +12,20 @@ services:
     ports:
       - "8080:80"
     networks:
-      - plsNet
+      - plsnet
     volumes:
       - ./httpd/src:/usr/local/apache2/htdocs
     depends_on:
-      - db
+      - app
   app:
     build: tomcat
     container_name: pls-app-server
+    networks:
+      - plsnet
     volumes:
       - ./tomcat/webapps:/usr/local/tomcat/webapps
-    networks:
-      - plsNet
-  networks:
-    plsNet:
-      driver: bridge
+    depends_on:
+      - db
+networks:
+  plsnet:
+    driver: bridge

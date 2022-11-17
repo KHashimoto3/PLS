@@ -145,5 +145,5 @@ RUN set -eux; \
 		exit 1; \
 	fi
 
-EXPOSE 8081
+EXPOSE 81
 CMD ["catalina.sh", "run"]

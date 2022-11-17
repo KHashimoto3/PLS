@@ -19,7 +19,7 @@
         const inputValue = document.getElementById("input");
         const name = inputValue.value;
         try {
-          const url = "http://app/hellodemo";
+          const url = "/hello?name=" + name;
           //例外が発生した場合は、catchへ移動
           const response = await fetch(url, {
             method: "GET",
