@@ -17,8 +17,6 @@ services:
       - ./nginx/src:/usr/share/nginx/html
     depends_on:
       - app
-    environment:
-      APP_SERVER: http://app:81
   app:
     build: tomcat
     container_name: pls-app-server
