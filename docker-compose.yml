@@ -18,7 +18,7 @@ services:
     depends_on:
       - app
     environment:
-      APP_SERVER: http://app:8081
+      APP_SERVER: http://app:81
   app:
     build: tomcat
     container_name: pls-app-server
