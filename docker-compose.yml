@@ -18,14 +18,14 @@ services:
     depends_on:
       - app
     environment:
-      APP_SERVER: http://app:81
+      APP_SERVER: http://app:8080
   app:
-    build: tomcat
-    container_name: pls-app-server
+    build: app
+    container_name: pls-app
+    ports:
+      - "8081:8080"
     networks:
       - plsnet
-    volumes:
-      - ./tomcat/webapps:/usr/local/tomcat/webapps
     depends_on:
       - db
 networks:
