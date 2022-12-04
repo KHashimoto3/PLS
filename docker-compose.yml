@@ -22,8 +22,6 @@ services:
   app:
     build: app
     container_name: pls-app
-    ports:
-      - "8081:8080"
     networks:
       - plsnet
     depends_on:
