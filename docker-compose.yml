@@ -3,9 +3,12 @@ services:
   db:
     build: mysql
     container_name: pls-db
+    ports:
+      - "3306:3306"
     networks:
       - plsnet
-    restart: always
+    volumes:
+      - ./mysql/db:/var/lib/mysql
   web:
     build: nginx
     container_name: pls-web-server
