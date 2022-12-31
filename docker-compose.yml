@@ -3,9 +3,22 @@ services:
   db:
     build: mysql
     container_name: pls-db
+    ports:
+      - "3306:3306"
     networks:
       - plsnet
-    restart: always
+    volumes:
+      - ./mysql/db:/var/lib/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+  app:
+    build: app
+    container_name: pls-app
+    networks:
+      - plsnet
+    environment:
+      DATASOURCE: jdbc:mysql://db:3306/plsdb
+    depends_on:
+      - db
   web:
     build: nginx
     container_name: pls-web-server
@@ -19,13 +32,6 @@ services:
       - app
     environment:
       APP_SERVER: http://app:8080
-  app:
-    build: app
-    container_name: pls-app
-    networks:
-      - plsnet
-    depends_on:
-      - db
 networks:
   plsnet:
     driver: bridge
