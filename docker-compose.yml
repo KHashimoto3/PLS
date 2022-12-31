@@ -9,6 +9,7 @@ services:
       - plsnet
     volumes:
       - ./mysql/db:/var/lib/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
   web:
     build: nginx
     container_name: pls-web-server
@@ -27,6 +28,8 @@ services:
     container_name: pls-app
     networks:
       - plsnet
+    environment:
+      DATASOURCE: jdbc:mysql://db:3306/plsdb
     depends_on:
       - db
 networks:
