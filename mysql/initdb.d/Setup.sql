@@ -8,7 +8,7 @@ grant all on plsdb.* to plsapiaccess;
 create user plsdirect@localhost identified by 'plsapi4040';
 grant all on plsdb.* to plsdirect@localhost;
 
-/*テーブル作成*/
+/*フォーム一覧テーブルの作成*/
 create table form(
     id int not null,
     name varchar(50),
@@ -17,3 +17,13 @@ create table form(
 
 insert into form values(1,'サンプル問題','sample');
 insert into form values(2,'サンプル（関数）',"sample_func");
+
+/*ユーザテーブルの作成*/
+create table user(
+    id int auto_increment,
+    name varchar(20),
+    hash_pass varchar(256),
+    index(id)
+);
+
+insert into user(name,hash_pass) values('khad','0505');
