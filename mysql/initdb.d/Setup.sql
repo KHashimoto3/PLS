@@ -25,5 +25,3 @@ create table user(
     hash_pass varchar(256),
     index(id)
 );
-
-insert into user(name,hash_pass) values('khad','0505');
